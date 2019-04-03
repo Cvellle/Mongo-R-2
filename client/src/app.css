@@ -1,9 +1,82 @@
-.note {
-  padding: 10px;
-  border: 1px solid #333;
+.adddata {
+  padding: 100px;
   margin: 15px;
+  background: black;
+  border-radius: 3rem;
+}
+
+ul {
+  position: absolute;
+  display: -webkit-flex;
+  left: -1.5em;
+  flex-wrap: wrap;
+}
+
+.adddata>input {
+  border-radius: 3rem;
+  border:0.5em solid rgb(216, 25, 25);
+  outline:none;
+  margin-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.adddata>input+button {
+  background: red;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  outline:none;
+}
+
+.item {
+  background: rgb(49, 31, 31);
+  list-style-type: none;
+  border-radius: 0 0 0 2rem;
+  border:1rem solid white;
+  color:white;
+  font-family: arial;
+  font-size: 0.95rem;
+  align-content: center;
+}
+
+.item>input {
+  border-radius: 1rem;
+  border:none;
+  outline:none;
+  padding-left: 0.3em;
+}
+
+.item>button {
+  background: rgb(49, 31, 31);
+  list-style-type: none;
+  border-radius: 1rem;
+  border-left:0.3em solid brown;
+  color:white;
+}
+
+.down {
+  position: fixed;
+  bottom: 0.5em;
+  width: 100%;
+  background:white;
+}
+
+.down>div>input {
+  border: 0.2em solid black;
+  border-radius: 0.5em;
+  margin-right: 0.4em;
+  padding-left: 0.3em;
+}
+
+.down>div>button {
+  border: 0.2em solid black;
+  border-radius: 0.5em;
+  margin-right: 0.4em;
+  background: rgb(180, 65, 65);
+  font-weight: 600;
+  color:black;
 }
 
 button {
-  margin: 0 15px;
+  cursor: pointer;
+  outline: none;
 }
