@@ -1,1 +1,6 @@
-# Mongo-R-heroku
+npm i
+
+cd client && npm i
+
+
+(root) npm start
