@@ -31,9 +31,6 @@ module.exports = function (app) {
       });
   });
 
-
-// this is our delete method
-// this method removes existing data in our database
 	app.delete("/api/datas", (req, res) => {
     const { id } = req.body;
     Data.findOneAndDelete(id, err => {
