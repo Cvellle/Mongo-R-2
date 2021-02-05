@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import './app.css';
+import "./app.css";
 
 class App extends Component {
   state = {
@@ -11,7 +11,7 @@ class App extends Component {
     idToDelete: null,
     idToUpdate: null,
     objectToUpdate: null,
-    updateToApply: null
+    updateToApply: null,
   };
 
   componentDidMount() {
@@ -30,14 +30,13 @@ class App extends Component {
   }
 
   getDataFromDb = () => {
-    axios.get('/api/datas')
-      .then((result) => {
-        this.setState({ data: result.data })
-      })
+    axios.get("/api/datas").then((result) => {
+      this.setState({ data: result.data });
+    });
   };
 
-  putDataToDB = message => {
-    let currentIds = this.state.data.map(data => data.id);
+  putDataToDB = (message) => {
+    let currentIds = this.state.data.map((data) => data.id);
     let idToBeAdded = 0;
     while (currentIds.includes(idToBeAdded)) {
       ++idToBeAdded;
@@ -45,13 +44,13 @@ class App extends Component {
 
     axios.post("/api/datas", {
       id: Number(idToBeAdded),
-      message: message
+      message: message,
     });
   };
 
-  deleteFromDB = idTodelete => {
+  deleteFromDB = (idTodelete) => {
     let objIdToDelete = null;
-    this.state.data.forEach(dat => {
+    this.state.data.forEach((dat) => {
       if (dat.id == idTodelete) {
         objIdToDelete = dat.id;
       }
@@ -60,13 +59,13 @@ class App extends Component {
     axios.delete("/api/datas", {
       data: {
         id: { id: objIdToDelete },
-      }
+      },
     });
   };
 
   updateDB = (idToUpdate, updateToApply) => {
     let objIdToUpdate = null;
-    this.state.data.map(dat => {
+    this.state.data.map((dat) => {
       if (Number(dat.id) == Number(idToUpdate)) {
         objIdToUpdate = Number(dat.id);
       }
@@ -74,7 +73,7 @@ class App extends Component {
 
     axios.put("/api/datas", {
       id: { id: idToUpdate },
-      update: { message: updateToApply }
+      update: { message: updateToApply },
     });
   };
 
@@ -106,56 +105,79 @@ class App extends Component {
         <div style={{ padding: "10px" }} className="adddata">
           <input
             type="text"
-            onChange={e => this.setState({ message: e.target.value })}
+            onChange={(e) => this.setState({ message: e.target.value })}
             placeholder="add something to the database"
             style={{ width: "200px" }}
           />
           <button onClick={() => this.putDataToDB(this.state.message)}>
             Add
-            </button>
+          </button>
         </div>
         <ul>
           {data.length <= 0
             ? "NO DB ENTRIES YET"
-            : data.map(dat => (
-              <li style={{ padding: "10px" }} key={data.message} className="item">
-                <input type="hidden" value={dat.id} />
-                <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
-                <span style={{ color: "gray" }}> data: </span>
-                {dat.message}
-                <br />
-                <input type="text" style={{ width: "150px" }} onChange={e => this.setState({ updateToApply: e.target.value })} placeholder="put new value of the item here" />
-                <button onMouseEnter={(e) => this.setUpdate(e)} onClick={(e) => this.updateItem(e)}>Update</button>
-                <br />
-                <button className="delbutt" onMouseOver={(e) => this.setDelete(e)} onClick={() => this.deleteItem()}>Delete</button>
-
-              </li>
-            ))}
+            : data.map((dat) => (
+                <li
+                  style={{ padding: "10px" }}
+                  key={data.message}
+                  className="item"
+                >
+                  <input type="hidden" value={dat.id} />
+                  <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
+                  <span style={{ color: "gray" }}> data: </span>
+                  {dat.message}
+                  <br />
+                  <input
+                    type="text"
+                    style={{ width: "150px" }}
+                    onChange={(e) =>
+                      this.setState({ updateToApply: e.target.value })
+                    }
+                    placeholder="put new value of the item here"
+                  />
+                  <button
+                    onMouseEnter={(e) => this.setUpdate(e)}
+                    onClick={(e) => this.updateItem(e)}
+                  >
+                    Update
+                  </button>
+                  <br />
+                  <button
+                    className="delbutt"
+                    onMouseOver={(e) => this.setDelete(e)}
+                    onClick={() => this.deleteItem()}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
         </ul>
         <div className="down">
           <div style={{ padding: "10px" }}>
             <input
               type="text"
               style={{ width: "200px" }}
-              onChange={e => this.setState({ idToDelete: e.target.value })}
+              onChange={(e) => this.setState({ idToDelete: e.target.value })}
               placeholder="put id of item to delete here"
             />
             <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
               Delete
-              </button>
+            </button>
           </div>
 
           <div style={{ padding: "10px" }}>
             <input
               type="text"
               style={{ width: "200px" }}
-              onChange={e => this.setState({ idToUpdate: Number(e.target.value) })}
+              onChange={(e) =>
+                this.setState({ idToUpdate: Number(e.target.value) })
+              }
               placeholder="id of item to update here"
             />
             <input
               type="text"
               style={{ width: "200px" }}
-              onChange={e => this.setState({ updateToApply: e.target.value })}
+              onChange={(e) => this.setState({ updateToApply: e.target.value })}
               placeholder="put new value of the item here"
             />
             <button
@@ -164,7 +186,7 @@ class App extends Component {
               }
             >
               Update
-              </button>
+            </button>
           </div>
         </div>
       </div>
